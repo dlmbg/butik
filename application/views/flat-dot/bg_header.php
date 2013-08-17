@@ -77,10 +77,13 @@
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo base_url(); ?>dashboard/laporan_pemesanan/harian"><i class="halflings-icon white list"></i> Pemesanan Harian</a></li>
-								<li><a href="<?php echo base_url(); ?>dashboard/laporan_pemesanan/bulanan"><i class="halflings-icon white list"></i> Pemesanan Bulanan</a></li>
-								<li><a href="<?php echo base_url(); ?>dashboard/laporan_pembayaran/harian"><i class="halflings-icon white list"></i> Pembayaran Harian</a></li>
-								<li><a href="<?php echo base_url(); ?>dashboard/laporan_pembayaran/bulanan"><i class="halflings-icon white list"></i> Pembayaran Bulanan</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_supplier"><i class="halflings-icon white list"></i> Laporan Daftar Supplier</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_kategori"><i class="halflings-icon white list"></i> Laporan Daftar Kategori</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_barang"><i class="halflings-icon white list"></i> Laporan Daftar Barang</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_barang_kategori"><i class="halflings-icon white list"></i> Laporan Daftar Barang Per Kategori</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_penjualan"><i class="halflings-icon white list"></i> Laporan Daftar Penjualan</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_pembelian"><i class="halflings-icon white list"></i> Laporan Daftar Pembelian</a></li>
+								<li><a href="<?php echo base_url(); ?>dashboard/laporan_petugas"><i class="halflings-icon white list"></i> Laporan Daftar Petugas</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">

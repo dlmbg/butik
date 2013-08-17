@@ -7,14 +7,12 @@ class sistem extends CI_Controller {
 		if($this->session->userdata("logged_in")!="")
 		{
 			$d['mark_dashboard'] = "";
-			$d['mark_pelanggan'] = "";
-			$d['mark_user'] = "";
-			$d['mark_bahan'] = "";
-			$d['mark_pemesanan'] = "";
-			$d['mark_pembayaran'] = "";
-			$d['mark_jenis_cetakan'] = "";
-			$d['mark_jenis_satuan'] = "";
-			$d['mark_belum_lunas'] = "";
+			$d['mark_pengguna'] = "";
+			$d['mark_kategori'] = "";
+			$d['mark_barang'] = "";
+			$d['mark_supplier'] = "";
+			$d['mark_pembelian'] = "";
+			$d['mark_penjualan'] = "";
 			
 			$d['dt_retrieve'] = $this->app_load_data_model->generate_index_sistem($GLOBALS['site_limit_medium'],$uri);
 			
@@ -34,14 +32,12 @@ class sistem extends CI_Controller {
 		if($this->session->userdata("logged_in")!="")
 		{
 			$d['mark_dashboard'] = "";
-			$d['mark_pelanggan'] = "";
-			$d['mark_user'] = "";
-			$d['mark_bahan'] = "";
-			$d['mark_pemesanan'] = "";
-			$d['mark_pembayaran'] = "";
-			$d['mark_jenis_cetakan'] = "";
-			$d['mark_jenis_satuan'] = "";
-			$d['mark_belum_lunas'] = "";
+			$d['mark_pengguna'] = "";
+			$d['mark_kategori'] = "";
+			$d['mark_barang'] = "";
+			$d['mark_supplier'] = "";
+			$d['mark_pembelian'] = "";
+			$d['mark_penjualan'] = "";
 			
 			$where['id_setting'] = $id_param;
 			$get = $this->db->get_where("dlmbg_setting",$where)->row();
@@ -81,16 +77,6 @@ class sistem extends CI_Controller {
    {
 		if($this->session->userdata("logged_in")!="")
 		{
-			$d['mark_dashboard'] = "";
-			$d['mark_pelanggan'] = "";
-			$d['mark_user'] = "";
-			$d['mark_bahan'] = "";
-			$d['mark_pemesanan'] = "";
-			$d['mark_pembayaran'] = "";
-			$d['mark_jenis_cetakan'] = "";
-			$d['mark_jenis_satuan'] = "";
-			$d['mark_belum_lunas'] = "";
-			
 			$id['id_setting'] = $this->input->post("id_param");
 			$in['tipe'] = $this->input->post("tipe");
 			$in['title'] = $this->input->post("title");
