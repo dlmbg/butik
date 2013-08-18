@@ -985,6 +985,70 @@ class app_load_data_model extends CI_Model {
 		$hasil .= $this->pagination->create_links();
 		return $hasil;
 	}
+	 
+	public function indexs_data_temp_penjualan()
+	{
+		//inisialiasi variabel
+		$hasil = "";
+		//gabungkan dengan tag html
+		//tag html untuk membuat tabel
+		$hasil .= '
+			<table class="table table-striped table-bordered bootstrap-datatable datatable">
+			  <thead>
+				  <tr>
+					  <th>No.</th>
+					  <th>Kode</th>
+					  <th>Nama Barang</th>
+					  <th>Harga</th>
+					  <th>Diskon</th>
+					  <th>Harga Diskon</th>
+					  <th>Jumlah</th>
+					  <th>Sub Total</th>
+					  <th><a class="btn btn-danger cbbarang" href="'.base_url().'dashboard/penjualan/tambah">
+							<i class="halflings-icon plus-sign halflings-icon"></i> Tambah
+						</a></th>
+				  </tr>
+			  </thead>';
+
+		$get = $this->db->select("b.kd_barang, b.nm_barang, a.harga_jual as jual_akhir, b.harga_jual jual_awal, b.diskon, a.qty, a.id")->join("barang b","b.kd_barang=a.kd_barang")->get("tmp_penjualan a");
+
+		$i=1;
+		$jum = 0;
+		//fetching data dari database
+		foreach($get->result() as $g)
+		{
+			//gabungkan dengan variabel yang sudah didefiniskan di awal
+			$hasil .= ' <tbody>
+				<tr>
+					<td>'.$i.'</td>
+					<td>'.$g->kd_barang.'</td>
+					<td>'.$g->nm_barang.'</td>
+					<td>'.number_format($g->jual_awal,"2",",",".").'</td>
+					<td>'.$g->diskon.'</td>
+					<td>'.number_format($g->jual_akhir,"2",",",".").'</td>
+					<td>'.$g->qty.'</td>
+					<td>'.number_format($g->jual_akhir*$g->qty,"2",",",".").'</td>
+					<td class="center">
+						<a class="btn btn-danger" href="'.base_url().'dashboard/penjualan/hapus/'.$g->id.'" onClick=\'return confirm("Anda yakin?");\'>
+							<i class="halflings-icon trash halflings-icon"></i> Hapus Item
+						</a>
+					</td>
+				</tr>
+				</tbody>';
+			$jum += $g->jual_akhir*$g->qty;
+			$i++;
+		}
+		$hasil .= ' <tbody>
+				<tr>
+					<td colspan="7">Grand Total Belanja (Rp) :	</td>
+					<td>'.number_format($jum,"2",",",".").'</td>
+				</tr>
+				</tbody>';
+		$hasil .= "</table>";
+		//gabungkan dengan navigasi paging
+		$hasil .= $this->pagination->create_links();
+		return $hasil;
+	}
 	
 	
 	

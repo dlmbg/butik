@@ -5,13 +5,13 @@
 
 			<?php if($this->session->userdata("level")=="admin"){?>
 			<li class="<?php echo $mark_pengguna; ?>"><a href="<?php echo base_url(); ?>dashboard/pengguna"><i class="fa-icon-tasks"></i><span class="hidden-tablet"> Data Pengguna</span></a></li>
-			<?php } ?>
 
 			<li class="<?php echo $mark_kategori; ?>"><a href="<?php echo base_url(); ?>dashboard/kategori"><i class="fa-icon-hdd"></i><span class="hidden-tablet"> Data Kategori</span></a></li>
 
 			<li class="<?php echo $mark_barang; ?>"><a href="<?php echo base_url(); ?>dashboard/barang"><i class="fa-icon-list-alt"></i><span class="hidden-tablet"> Data Barang</span></a></li>
 
 			<li class="<?php echo $mark_supplier; ?>"><a href="<?php echo base_url(); ?>dashboard/supplier"><i class="fa-icon-leaf"></i><span class="hidden-tablet"> Data Suplier</span></a></li>
+			<?php } ?>
 
 			<li class="<?php echo $mark_pembelian; ?>"><a href="<?php echo base_url(); ?>dashboard/pembelian"><i class="fa-icon-align-justify"></i><span class="hidden-tablet"> Pembelian Barang</span></a></li>
 

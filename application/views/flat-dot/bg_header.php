@@ -70,7 +70,6 @@
 								<li><a href="<?php echo base_url(); ?>dashboard/sistem"><i class="halflings-icon white tasks"></i> Konfigurasi</a></li>
 							</ul>
 						</li>
-						<?php } ?>
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white print"></i> Laporan
@@ -86,6 +85,7 @@
 								<li><a href="<?php echo base_url(); ?>dashboard/laporan_petugas"><i class="halflings-icon white list"></i> Laporan Daftar Petugas</a></li>
 							</ul>
 						</li>
+						<?php } ?>
 						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white user"></i> <?php echo $this->session->userdata("nama_user_login"); ?>
