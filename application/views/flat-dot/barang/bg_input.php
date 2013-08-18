@@ -33,6 +33,16 @@
 				<div class="control-group">
 				  <label class="control-label">Nama Barang</label>
 				  <div class="controls">
+				  	<style>
+					div.b128{
+					    border-left: 1px black solid;
+						height: 60px;
+					}	
+					</style>
+				  	<?php
+				  	if($st=="edit")
+					echo bar128($id_param);
+					?>
 					<input type="text" class="input-xlarge" value="<?php echo $nm_barang; ?>" name="nm_barang" required />
 				  </div>
 				</div>
