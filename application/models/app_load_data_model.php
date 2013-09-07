@@ -592,6 +592,7 @@ class app_load_data_model extends CI_Model {
 					  <th>Nama Supplier</th>
 					  <th>Alamat</th>
 					  <th>Telpon</th>
+					  <th>email</th>
 				  </tr>
 			  </thead>';
 
@@ -622,6 +623,7 @@ class app_load_data_model extends CI_Model {
 					<td>'.$g->nm_supplier.'</td>
 					<td>'.$g->alamat.'</td>
 					<td>'.$g->telpon.'</td>
+					<td>'.$g->email.'</td>
 					<td class="center">
 						<a class="btn btn-info" href="'.base_url().'dashboard/supplier/edit/'.$g->kd_supplier.'">
 							<i class="halflings-icon edit halflings-icon"></i>  

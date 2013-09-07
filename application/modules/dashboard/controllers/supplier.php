@@ -50,6 +50,7 @@ class supplier extends CI_Controller {
 			$d['nm_supplier'] = "";
 			$d['alamat'] = "";
 			$d['telpon'] = "";
+			$d['email'] = "";
 
 			$d['st'] = "tambah";
 			
@@ -88,6 +89,7 @@ class supplier extends CI_Controller {
 			$d['nm_supplier'] = $get->nm_supplier;
 			$d['alamat'] = $get->alamat;
 			$d['telpon'] = $get->telpon;
+			$d['email'] = $get->email;
 
 			$d['st'] = "edit";
 			
@@ -113,6 +115,7 @@ class supplier extends CI_Controller {
 			$dt['nm_supplier'] = $_POST['nm_supplier'];
 			$dt['alamat'] = $_POST['alamat'];
 			$dt['telpon'] = $_POST['telpon'];
+			$dt['email'] = $_POST['email'];
 			$st = $_POST['st'];
 			
 			//jika status form = tambah

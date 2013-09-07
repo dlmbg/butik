@@ -30,6 +30,13 @@
 					<input type="text" class="input-xlarge" value="<?php echo $telpon; ?>" name="telpon" required />
 				  </div>
 				</div>
+			  
+				<div class="control-group">
+				  <label class="control-label">Email</label>
+				  <div class="controls">
+					<input type="text" class="input-xlarge" value="<?php echo $email; ?>" name="email" required />
+				  </div>
+				</div>
 				
 				<div class="form-actions">
 				  <button type="submit" class="btn btn-primary">Save changes</button>

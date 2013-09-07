@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 18. Agustus 2013 jam 08:47
--- Versi Server: 5.1.44
--- Versi PHP: 5.3.1
+-- Generation Time: Sep 07, 2013 at 08:39 PM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE IF NOT EXISTS `barang` (
@@ -38,13 +38,13 @@ CREATE TABLE IF NOT EXISTS `barang` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`kd_barang`, `nm_barang`, `harga_beli`, `harga_jual`, `diskon`, `stok`, `keterangan`, `kd_kategori`) VALUES
-('B001', 'Bluespurple batik with bolero dress', 10000, 120000, 10, 13, 'Elegan', 'K01'),
+('B001', 'Bluespurple batik with bolero dress', 10000, 120000, 10, 8, 'Elegan', 'K01'),
 ('B018', 'Krancang Kebaya Purple', 140000, 185000, 10, 10, 'baru', 'K04'),
-('B002', 'Greenpink batik dress with bolero', 2000, 120000, 10, 6, 'Elegan', 'K01'),
+('B002', 'Greenpink batik dress with bolero', 2000, 120000, 10, 8, 'Elegan', 'K01'),
 ('B003', 'Chifon Browngrey batik blouse', 80000, 125000, 10, 10, 'keren', 'K01'),
 ('B004', 'Brown print Batik dress', 85000, 135000, 10, 19, 'Elegan', 'K01'),
 ('B005', 'Green Dewi batik dress', 80000, 125000, 10, 10, 'baru', 'K01'),
@@ -70,7 +70,7 @@ INSERT INTO `barang` (`kd_barang`, `nm_barang`, `harga_beli`, `harga_jual`, `dis
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dlmbg_setting`
+-- Table structure for table `dlmbg_setting`
 --
 
 CREATE TABLE IF NOT EXISTS `dlmbg_setting` (
@@ -79,25 +79,26 @@ CREATE TABLE IF NOT EXISTS `dlmbg_setting` (
   `title` varchar(100) NOT NULL,
   `content_setting` text NOT NULL,
   PRIMARY KEY (`id_setting`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data untuk tabel `dlmbg_setting`
+-- Dumping data for table `dlmbg_setting`
 --
 
 INSERT INTO `dlmbg_setting` (`id_setting`, `tipe`, `title`, `content_setting`) VALUES
-(1, 'site_title', 'Nama Situs', 'Butik Indah | Way Jepara Lampung Timur'),
+(1, 'site_title', 'Nama Situs', 'Sportindo'),
 (2, 'site_quotes', 'Quotes Situs', 'Centra Pakaian Cowok dan Cewek'),
 (3, 'site_footer', 'Teks Footer', 'Gede Lumbung - 2013 <br>Aplikasi Percetakan | DLMBG'),
 (4, 'key_login', 'Hash Key MD5', 'AppButik'),
 (5, 'site_theme', 'Theme Folder', 'flat-dot'),
 (6, 'site_limit_small', 'Limit Data Small', '5'),
-(7, 'site_limit_medium', 'Limit Data Medium', '10');
+(7, 'site_limit_medium', 'Limit Data Medium', '10'),
+(8, 'site_minimal_barang', 'Minimal Barang', '5');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
 CREATE TABLE IF NOT EXISTS `kategori` (
@@ -107,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `kategori` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`kd_kategori`, `nm_kategori`) VALUES
@@ -121,7 +122,7 @@ INSERT INTO `kategori` (`kd_kategori`, `nm_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembelian`
+-- Table structure for table `pembelian`
 --
 
 CREATE TABLE IF NOT EXISTS `pembelian` (
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `pembelian` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pembelian`
+-- Dumping data for table `pembelian`
 --
 
 INSERT INTO `pembelian` (`no_pembelian`, `tgl_transaksi`, `catatan`, `kd_supplier`, `userid`) VALUES
@@ -149,13 +150,14 @@ INSERT INTO `pembelian` (`no_pembelian`, `tgl_transaksi`, `catatan`, `kd_supplie
 ('BL00008', '2013-08-08', 'B001', 'S01', 'admin'),
 ('BL00009', '2013-08-16', '', 'S01', 'admin'),
 ('BL00010', '2013-08-30', 'B001', 'S01', 'admin'),
+('BL00013', '2013-09-07', 'ngebon', 'S01', 'admin'),
 ('BL00012', '2013-08-20', 'dsdsds', 'S01', 'admin'),
 ('BL00011', '2013-08-18', 'dsdsds', 'S01', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembelian_item`
+-- Table structure for table `pembelian_item`
 --
 
 CREATE TABLE IF NOT EXISTS `pembelian_item` (
@@ -167,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `pembelian_item` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pembelian_item`
+-- Dumping data for table `pembelian_item`
 --
 
 INSERT INTO `pembelian_item` (`no_pembelian`, `kd_barang`, `harga_beli`, `jumlah`) VALUES
@@ -202,12 +204,29 @@ INSERT INTO `pembelian_item` (`no_pembelian`, `kd_barang`, `harga_beli`, `jumlah
 ('BL00010', 'B001', 10000, 1),
 ('BL00011', 'B014', 10000, 5),
 ('BL00011', 'B004', 120000, 10),
-('BL00012', 'B001', 10000, 10);
+('BL00012', 'B001', 10000, 10),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', 'B030', 0, 3),
+('BL00013', 'sss', 0, 10),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', '', 0, 0),
+('BL00013', 'sss', 0, 10),
+('BL00013', 'dd', 0, 10),
+('BL00013', 'B001', 0, 1),
+('BL00013', 'B002', 0, 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan`
+-- Table structure for table `penjualan`
 --
 
 CREATE TABLE IF NOT EXISTS `penjualan` (
@@ -220,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `penjualan` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `penjualan`
+-- Dumping data for table `penjualan`
 --
 
 INSERT INTO `penjualan` (`no_penjualan`, `tgl_transaksi`, `pelanggan`, `catatan`, `userid`) VALUES
@@ -234,12 +253,16 @@ INSERT INTO `penjualan` (`no_penjualan`, `tgl_transaksi`, `pelanggan`, `catatan`
 ('JL00008', '2013-08-16', 'Umum', '', 'admin'),
 ('JL00009', '2013-08-16', 'Umum', 'B001', 'admin'),
 ('JL00010', '2013-08-19', 'dede', 'ngebon', 'admin'),
-('JL00011', '2013-08-23', 'dede', 'dsdsds', 'dedek');
+('JL00011', '2013-08-23', 'dede', 'dsdsds', 'dedek'),
+('JL00012', '2013-09-04', 'Umum', 'B001', 'admin'),
+('JL00013', '2013-09-08', 'dede', 'ngebon', 'admin'),
+('JL00014', '2013-09-07', 'Umum', 'B001', 'admin'),
+('JL00015', '2013-09-09', 'dede', 'ngebon', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan_item`
+-- Table structure for table `penjualan_item`
 --
 
 CREATE TABLE IF NOT EXISTS `penjualan_item` (
@@ -251,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `penjualan_item` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `penjualan_item`
+-- Dumping data for table `penjualan_item`
 --
 
 INSERT INTO `penjualan_item` (`no_penjualan`, `kd_barang`, `harga_jual`, `jumlah`) VALUES
@@ -272,12 +295,16 @@ INSERT INTO `penjualan_item` (`no_penjualan`, `kd_barang`, `harga_jual`, `jumlah
 ('JL00009', 'B001', 108000, 1),
 ('JL00010', 'B004', 121500, 3),
 ('JL00010', 'B001', 108000, 10),
-('JL00011', 'B010', 89100, 3);
+('JL00011', 'B010', 89100, 3),
+('JL00012', 'B001', 108000, 1),
+('JL00013', 'B001', 108000, 3),
+('JL00014', 'B001', 108000, 1),
+('JL00015', 'B001', 108000, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `supplier`
+-- Table structure for table `supplier`
 --
 
 CREATE TABLE IF NOT EXISTS `supplier` (
@@ -285,22 +312,23 @@ CREATE TABLE IF NOT EXISTS `supplier` (
   `nm_supplier` varchar(100) NOT NULL,
   `alamat` varchar(200) NOT NULL,
   `telpon` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
   PRIMARY KEY (`kd_supplier`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `supplier`
+-- Dumping data for table `supplier`
 --
 
-INSERT INTO `supplier` (`kd_supplier`, `nm_supplier`, `alamat`, `telpon`) VALUES
-('S01', 'Indah Taylor', 'Wayabung, TuBa, Lampung', '0819123123'),
-('S02', 'Jogja Fashion', 'Way Jepara, Lampung Timur', '0819123123'),
-('S03', 'Bunafit Fashion', 'Bantul, Yogyakarta', '08191222231341');
+INSERT INTO `supplier` (`kd_supplier`, `nm_supplier`, `alamat`, `telpon`, `email`) VALUES
+('S01', 'Indah Taylor', 'Wayabung, TuBa, Lampung', '0819123123', 'gedesumawijaya@gmail.com'),
+('S02', 'Jogja Fashion', 'Way Jepara, Lampung Timur', '0819123123', ''),
+('S03', 'Bunafit Fashion', 'Bantul, Yogyakarta', '08191222231341', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tmp_pembelian`
+-- Table structure for table `tmp_pembelian`
 --
 
 CREATE TABLE IF NOT EXISTS `tmp_pembelian` (
@@ -310,17 +338,17 @@ CREATE TABLE IF NOT EXISTS `tmp_pembelian` (
   `qty` int(3) NOT NULL,
   `userid` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data untuk tabel `tmp_pembelian`
+-- Dumping data for table `tmp_pembelian`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tmp_penjualan`
+-- Table structure for table `tmp_penjualan`
 --
 
 CREATE TABLE IF NOT EXISTS `tmp_penjualan` (
@@ -333,14 +361,14 @@ CREATE TABLE IF NOT EXISTS `tmp_penjualan` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data untuk tabel `tmp_penjualan`
+-- Dumping data for table `tmp_penjualan`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_login`
+-- Table structure for table `user_login`
 --
 
 CREATE TABLE IF NOT EXISTS `user_login` (
@@ -348,16 +376,16 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `userid` varchar(20) NOT NULL,
   `password` varchar(200) NOT NULL,
   `nama` varchar(100) NOT NULL,
-  `level` enum('kasir','admin') NOT NULL DEFAULT 'kasir',
+  `level` enum('kasir','admin','owner') NOT NULL DEFAULT 'kasir',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data untuk tabel `user_login`
+-- Dumping data for table `user_login`
 --
 
 INSERT INTO `user_login` (`id`, `userid`, `password`, `nama`, `level`) VALUES
 (1, 'admin', '5acd43ac28106d8f538ec0ccf9fb63a7', 'Bunafit Nugroho', 'admin'),
-(2, 'kasir', 'c7911af3adbd12a035b289556d96470a', 'Septi Suhesti', 'kasir'),
+(2, 'septi', 'b0d1a1e154390608c41cbb526739bf67', 'Septi Suhesti', 'owner'),
 (3, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', 'admin'),
 (6, 'dedek', '8ad6bef568e95852ecea0cb6fce293fd', 'dedek', 'kasir');
