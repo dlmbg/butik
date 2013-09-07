@@ -35,13 +35,15 @@
 				<div class="control-group">
 				  <label class="control-label">Level</label>
 				  <div class="controls">
-				  	<?php $a='selected'; $k='selected';
-				  	if($level=="admin"){$a='selected'; $k='';}
-				  	else if($level=="kasir"){$a=''; $k='selected';}
+				  	<?php $a='selected'; $k='selected'; $o='selected';
+				  	if($level=="admin"){$a='selected'; $k=''; $o='';}
+				  	else if($level=="kasir"){$a=''; $k='selected'; $o='';}
+				  	else if($level=="owner"){$a=''; $k=''; $o='selected';}
 				  	?>
 				  	<select name="level">
 				  		<option value="admin" <?php echo $a; ?>>Admin</option>
 				  		<option value="kasir" <?php echo $k; ?>>Kasir</option>
+				  		<option value="owner" <?php echo $o; ?>>Owner</option>
 				  	</select>
 				  </div>
 				</div>

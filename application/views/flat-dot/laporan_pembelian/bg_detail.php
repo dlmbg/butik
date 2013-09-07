@@ -6,6 +6,8 @@
 			Laporan Daftar Pembelian</h2>
 		</div>
 		<div class="box-content">
+			<a href="<?php echo base_url(); ?>dashboard/laporan_pembelian/cetak_excel/<?php echo $param; ?>" class="btn btn-danger">Cetak Excel</a>
+			<a href="<?php echo base_url(); ?>dashboard/laporan_pembelian/cetak_pdf/<?php echo $param; ?>" class="btn btn-danger">Cetak PDF</a>
 			<?php echo $dt_retrieve; ?>
 			<?php echo $dt_retrieve_detail; ?>
 		</div>

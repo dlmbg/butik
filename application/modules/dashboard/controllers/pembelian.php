@@ -35,41 +35,26 @@ class pembelian extends CI_Controller {
 		}
 	}
 
-	function tambah()
-	{
-		if($this->session->userdata("logged_in")!="")
-		{
-			//ambil data dari database
-			$d['barang'] = $this->db->get("barang");
-			
-			//load view
-			//parsing data ke view
- 			$this->load->view($GLOBALS['site_theme']."/pembelian/bg_input_item",$d);
-		}
-		else
-		{
-			//arahkan ke halaman login
-			redirect("login");
-		}
-	}
-
 	function tambah_item()
 	{
 		if($this->session->userdata("logged_in")!="")
 		{
 			//masukkan data POST ke dalam variabel array
-			$dt['kd_barang'] = $_POST['kd_barang'];
-			$dt['qty'] = $_POST['qty'];
-			$dt['harga_beli'] = $_POST['harga_beli'];
-			$dt['userid'] = $this->session->userdata("username");
+			$cek = $this->db->get_where("barang",array("kd_barang"=>$_POST['kd_barang']))->num_rows();
+			if($cek==0){
+				$this->session->set_flashdata("salah","Kode barang tidak ditemukan");
+				redirect("dashboard/pembelian");
+			}
+			else
+			{
+				$dt['kd_barang'] = $_POST['kd_barang'];
+				$dt['qty'] = $_POST['qty'];
+				$dt['userid'] = $this->session->userdata("username");
 
-			//masukkan data ke dalam tabel
-			$this->db->insert("tmp_pembelian",$dt);
-			?>
-				<script>
-					window.parent.location.reload(true);
-				</script>
-			<?php
+				//masukkan data ke dalam tabel
+				$this->db->insert("tmp_pembelian",$dt);
+				redirect("dashboard/pembelian");
+			}
 			
 		}
 		else

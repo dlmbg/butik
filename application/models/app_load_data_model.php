@@ -705,6 +705,7 @@ class app_load_data_model extends CI_Model {
 					  <th>No.</th>
 					  <th>Kode</th>
 					  <th>Nama Barang</th>
+					  <th>Jumlah/Stok</th>
 					  <th>Beli (Rp.)</th>
 					  <th>Jual (Rp.)</th>
 					  <th>Disc (%)</th>
@@ -713,6 +714,7 @@ class app_load_data_model extends CI_Model {
 
 		//get data dari session. untuk pencarian
 		$where['nm_barang']  = $this->session->userdata("key"); 
+		$where['kd_barang']  = $this->session->userdata("key"); 
 
 		//hitung total data untuk paging
 		$tot_hal = $this->db->like($where)->get("barang");
@@ -725,7 +727,7 @@ class app_load_data_model extends CI_Model {
 		$this->pagination->initialize($config);
 
 		//mengambil data kategori dengan limit
-		$get = $this->db->query("SELECT * FROM barang where nm_barang like '%".$where['nm_barang']."%' ORDER BY kd_barang ASC LIMIT ".$offset.",".$limit." ");
+		$get = $this->db->query("SELECT * FROM barang where nm_barang like '%".$where['nm_barang']."%' or kd_barang like '%".$where['kd_barang']."%'  ORDER BY kd_barang ASC LIMIT ".$offset.",".$limit." ");
 		$i = $offset+1;
 
 		//fetching data
@@ -737,6 +739,7 @@ class app_load_data_model extends CI_Model {
 					<td>'.$i.'</td>
 					<td>'.$g->kd_barang.'</td>
 					<td>'.$g->nm_barang.'</td>
+					<td>'.$g->stok.'</td>
 					<td>'.$g->harga_beli.'</td>
 					<td>'.$g->harga_jual.'</td>
 					<td>'.$g->diskon.'</td>
@@ -942,13 +945,10 @@ class app_load_data_model extends CI_Model {
 					  <th>Harga Beli (Rp.)</th>
 					  <th>Jumlah</th>
 					  <th>Sub Total</th>
-					  <th><a class="btn btn-danger cbbarang" href="'.base_url().'dashboard/pembelian/tambah">
-							<i class="halflings-icon plus-sign halflings-icon"></i> Tambah
-						</a></th>
 				  </tr>
 			  </thead>';
 
-		$get = $this->db->select("b.kd_barang, b.nm_barang, a.harga_beli, a.qty, a.id")->join("barang b","b.kd_barang=a.kd_barang")->get("tmp_pembelian a");
+		$get = $this->db->select("b.kd_barang, b.nm_barang, b.harga_beli, a.qty, a.id")->join("barang b","b.kd_barang=a.kd_barang")->get("tmp_pembelian a");
 
 		$i=1;
 		$jum = 0;
@@ -1004,9 +1004,6 @@ class app_load_data_model extends CI_Model {
 					  <th>Harga Diskon</th>
 					  <th>Jumlah</th>
 					  <th>Sub Total</th>
-					  <th><a class="btn btn-danger cbbarang" href="'.base_url().'dashboard/penjualan/tambah">
-							<i class="halflings-icon plus-sign halflings-icon"></i> Tambah
-						</a></th>
 				  </tr>
 			  </thead>';
 
@@ -1041,6 +1038,63 @@ class app_load_data_model extends CI_Model {
 		$hasil .= ' <tbody>
 				<tr>
 					<td colspan="7">Grand Total Belanja (Rp) :	</td>
+					<td>'.number_format($jum,"2",",",".").'</td>
+				</tr>
+				</tbody>';
+		$hasil .= "</table>";
+		//gabungkan dengan navigasi paging
+		$hasil .= $this->pagination->create_links();
+		return $hasil;
+	}
+	 
+	public function indexs_data_penjualan_nota($id_param)
+	{
+		//inisialiasi variabel
+		$hasil = "";
+		//gabungkan dengan tag html
+		//tag html untuk membuat tabel
+		$hasil .= '
+			<table class="table-list" width="500">
+			  <thead>
+				  <tr>
+					  <th>Qty</th>
+					  <th>Nama Barang</th>
+					  <th>Harga (Rp.)</th>
+					  <th>Diskon</th>
+					  <th>Sub Total</th>
+				  </tr>
+			  </thead>';
+
+		$get = $this->db->select("a.kd_barang, a.nm_barang, b.harga_jual, a.harga_beli, a.diskon, b.jumlah, b.no_penjualan")->join("barang a","a.kd_barang=b.kd_barang")->get_where("penjualan_item b",array("no_penjualan"=>$id_param));
+
+		$i=1;
+		$jum = 0;
+		//fetching data dari database
+		foreach($get->result() as $g)
+		{
+			$besarDiskon = intval($g->harga_jual) * (intval($g->diskon)/100);
+			$hargaDiskon = intval($g->harga_jual) - $besarDiskon;
+			
+			# Membuat Subtotal
+			$subtotal  = $hargaDiskon * intval($g->jumlah); 
+			# Menghitung Total Belanja keseluruhan
+
+			//gabungkan dengan variabel yang sudah didefiniskan di awal
+			$hasil .= ' <tbody>
+				<tr>
+					<td>'.$g->jumlah.'</td>
+					<td>'.$g->nm_barang.'</td>
+					<td>'.number_format($g->harga_jual,"2",",",".").'</td>
+					<td>'.$g->diskon.'</td>
+					<td>'.number_format($subtotal,"2",",",".").'</td>
+				</tr>
+				</tbody>';
+			$i++;
+			$jum = $jum + intval($subtotal);
+		}
+		$hasil .= ' <tbody>
+				<tr>
+					<td colspan="4">Grand Total Belanja (Rp) :	</td>
 					<td>'.number_format($jum,"2",",",".").'</td>
 				</tr>
 				</tbody>';

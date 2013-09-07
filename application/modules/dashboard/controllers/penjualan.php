@@ -35,45 +35,32 @@ class penjualan extends CI_Controller {
 		}
 	}
 
-	function tambah()
-	{
-		if($this->session->userdata("logged_in")!="")
-		{
-			//ambil data dari database
-			$d['barang'] = $this->db->get("barang");
-			
-			//load view
-			//parsing data ke view
- 			$this->load->view($GLOBALS['site_theme']."/penjualan/bg_input_item",$d);
-		}
-		else
-		{
-			//arahkan ke halaman login
-			redirect("login");
-		}
-	}
-
 	function tambah_item()
 	{
 		if($this->session->userdata("logged_in")!="")
 		{
-			//ambil harga diskon
-			$g = $this->db->get_where("barang",array("kd_barang"=>$_POST['kd_barang']))->row();
-			$harga_jual = $g->harga_jual-($g->harga_jual*$g->diskon/100);
-
 			//masukkan data POST ke dalam variabel array
-			$dt['userid'] = $this->session->userdata("username");
-			$dt['kd_barang'] = $_POST['kd_barang'];
-			$dt['qty'] = $_POST['qty'];
-			$dt['harga_jual'] = $harga_jual;
+			$cek = $this->db->get_where("barang",array("kd_barang"=>$_POST['kd_barang']))->num_rows();
+			if($cek==0){
+				$this->session->set_flashdata("salah","Kode barang tidak ditemukan");
+				redirect("dashboard/penjualan");
+			}
+			else
+			{
+				//ambil harga diskon
+				$g = $this->db->get_where("barang",array("kd_barang"=>$_POST['kd_barang']))->row();
+				$harga_jual = $g->harga_jual-($g->harga_jual*$g->diskon/100);
 
-			//masukkan data ke dalam tabel
-			$this->db->insert("tmp_penjualan",$dt);
-			?>
-				<script>
-					window.parent.location.reload(true);
-				</script>
-			<?php
+				//masukkan data POST ke dalam variabel array
+				$dt['userid'] = $this->session->userdata("username");
+				$dt['kd_barang'] = $_POST['kd_barang'];
+				$dt['qty'] = $_POST['qty'];
+				$dt['harga_jual'] = $harga_jual;
+
+				//masukkan data ke dalam tabel
+				$this->db->insert("tmp_penjualan",$dt);
+				redirect("dashboard/penjualan");
+			}
 			
 		}
 		else
@@ -110,7 +97,7 @@ class penjualan extends CI_Controller {
 			}
 			$this->db->truncate('tmp_penjualan'); 
 			
-			redirect("dashboard/penjualan");
+			redirect("dashboard/penjualan/detail/".$d['no_penjualan']);
 			
 		}
 		else
@@ -128,6 +115,24 @@ class penjualan extends CI_Controller {
 			//hapus data di dalam tabel
 			$this->db->delete("tmp_penjualan",$id);
 			redirect("dashboard/penjualan");
+		}
+		else
+		{
+			redirect("login");
+		}
+	}
+
+	function detail($id_param)
+	{
+		if($this->session->userdata("logged_in")!="")
+		{
+			$get = $this->db->get_where("penjualan",array("no_penjualan"=>$id_param))->row();
+			$d['tgl_transaksi'] = $get->tgl_transaksi;
+			$d['pelanggan'] = $get->pelanggan;
+
+			$d['detail'] = $this->app_load_data_model->indexs_data_penjualan_nota($id_param);
+
+ 			$this->load->view($GLOBALS['site_theme']."/penjualan/nota_penjualan",$d);
 		}
 		else
 		{

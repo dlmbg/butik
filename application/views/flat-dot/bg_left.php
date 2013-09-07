@@ -3,9 +3,10 @@
 		<ul class="nav nav-tabs nav-stacked main-menu">
 			<li class="<?php echo $mark_dashboard; ?>"><a href="<?php echo base_url(); ?>"><i class="fa-icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
 
-			<?php if($this->session->userdata("level")=="admin"){?>
+			<?php if($this->session->userdata("level")=="owner"){?>
 			<li class="<?php echo $mark_pengguna; ?>"><a href="<?php echo base_url(); ?>dashboard/pengguna"><i class="fa-icon-tasks"></i><span class="hidden-tablet"> Data Pengguna</span></a></li>
-
+			<?php } ?>
+			<?php if($this->session->userdata("level")=="admin" || $this->session->userdata("level")=="owner"){?>
 			<li class="<?php echo $mark_kategori; ?>"><a href="<?php echo base_url(); ?>dashboard/kategori"><i class="fa-icon-hdd"></i><span class="hidden-tablet"> Data Kategori</span></a></li>
 
 			<li class="<?php echo $mark_barang; ?>"><a href="<?php echo base_url(); ?>dashboard/barang"><i class="fa-icon-list-alt"></i><span class="hidden-tablet"> Data Barang</span></a></li>
